@@ -32,7 +32,7 @@ public class InitData implements CommandLineRunner{
             while( line2 != null ){
                 if( !line2.trim().equals("") ){
                     TrainFood tf = new TrainFood();
-                    tf.setId(UUID.randomUUID());
+                    tf.setId(UUID.randomUUID().toString());
                     String[] lineTemp = line2.trim().split("=");
                     tf.setTripId(lineTemp[1]);
                     lineTemp = br2.readLine().trim().split("=");

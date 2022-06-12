@@ -15,7 +15,6 @@ import javax.validation.Valid;
 public class TrainType {
     @Valid
     @Id
-    @Column(name = "trainTypeId")
     private String id;
 
     @Valid
