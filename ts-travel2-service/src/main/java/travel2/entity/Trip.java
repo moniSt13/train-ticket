@@ -18,7 +18,7 @@ import java.util.UUID;
 public class Trip {
     @Valid
     @Id
-    @Column(name = "trip_uuid")
+    @Column(length = 36)
     private String id;
 
     @Embedded

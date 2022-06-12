@@ -9,9 +9,9 @@ spring:
   application:
     name: ts-train-food-service
   datasource:
-    url: jdbc:mysql://ts-train-food-mysql:3306/ts-train-food-mysql?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
-    username: root
-    password: root
+    url: jdbc:mysql://${DELIVERY_MYSQL_HOST:ts-train-food-mysql}:${DELIVERY_MYSQL_PORT:3306}/${DELIVERY_MYSQL_DATABASE:ts-train-food-mysql}?useSSL=false
+    username: ${DELIVERY_MYSQL_USER:root}
+    password: ${DELIVERY_MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.jdbc.Driver
 
   jpa:
