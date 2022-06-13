@@ -10,9 +10,9 @@ spring:
   application:
     name: ts-travel2-service
   datasource:
-    url: jdbc:mysql://${DELIVERY_MYSQL_HOST:ts-travel2-mysql}:${DELIVERY_MYSQL_PORT:3306}/${DELIVERY_MYSQL_DATABASE:ts-travel2-mysql}?useSSL=false
-    username: ${DELIVERY_MYSQL_USER:root}
-    password: ${DELIVERY_MYSQL_PASSWORD:root}
+    url: jdbc:mysql://${TRAVEL2_MYSQL_HOST:ts-travel2-mysql}:${TRAVEL2_MYSQL_PORT:3306}/${TRAVEL2_MYSQL_DATABASE:ts-travel2-mysql}?useSSL=false
+    username: ${TRAVEL2_MYSQL_USER:root}
+    password: ${TRAVEL2_MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.jdbc.Driver
 
   jpa:
