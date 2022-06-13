@@ -5,16 +5,18 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: nacos-0.nacos-headless.default.svc.cluster.local,nacos-1.nacos-headless.default.svc.cluster.local,nacos-2.nacos-headless.default.svc.cluster.local
+        server-addr: ${NACOS_ADDRS:nacos-0.nacos-headless.default.svc.cluster.local,nacos-1.nacos-headless.default.svc.cluster.local,nacos-2.nacos-headless.default.svc.cluster.local}
   application:
     name: ts-station-food-service
-  data:
-    mongodb:
-      host: ts-staion-food-mongo
-#      username: user
-#      password: ${MONGODB_PASSWORD}
-      database: ts
-      port: 27017
+  datasource:
+#    url: jdbc:mysql://10.176.122.80:32005/ts-station-food-mysql?useSSL=false
+    url: jdbc:mysql://${STATION_FOOD_MYSQL_HOST:ts-station-food-mysql}:${STATION_FOOD_MYSQL_PORT:3306}/${STATION_FOOD_MYSQL_DATABASE:ts-station-food-mysql}?useSSL=false
+    username: ${STATION_FOOD_MYSQL_USER:root}
+    password: ${STATION_FOOD_MYSQL_PASSWORD:root}
+    driver-class-name: com.mysql.jdbc.Driver
+    jpa:
+      hibernate:
+        ddl-auto: update
 
 swagger:
   controllerPackage: food.controller
