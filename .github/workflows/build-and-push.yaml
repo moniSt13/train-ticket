@@ -1,0 +1,37 @@
+name: Java CI
+
+on: 
+  push:
+    branches:
+      - feature/build-test
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 8
+        uses: actions/setup-java@v3
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+      - name: Build with Maven
+        run: mvn clean package -Dmaven.test.skip=true
+
+      - name: source-version
+        id: source-version
+        run: |
+          echo "::set-output name=version::$(cat ts-auth-service/version)"
+
+      - name: push-container-image
+        uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: ts-auth-service
+          registry: ghcr.io
+          username: ${{ github.repository }}
+          password: ${{ secrets.GHCR_TOKEN }}
+          dockerfile: ts-auth-service/Dockerfile
+          directory:  ts-auth-service
+          addLatest: true
+          tags: ${{ steps.source-version.outputs.version }},latest
