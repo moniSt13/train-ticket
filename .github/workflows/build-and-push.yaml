@@ -19,11 +19,12 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -Dmaven.test.skip=true
 
+      #needs to be copied when other service should be changed
       - name: source-version
         id: source-version
         run: |
           echo "::set-output name=version::$(cat ts-auth-service/version)"
-
+      #needs to be copied when other service should be changed
       - name: push-container-image
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
