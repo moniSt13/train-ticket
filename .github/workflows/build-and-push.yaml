@@ -36,3 +36,21 @@ jobs:
           directory:  ts-auth-service
           addLatest: true
           tags: ${{ steps.source-version.outputs.version }},latest
+      
+      #needs to be copied when other service should be changed - ts-admin-basic-info-service
+      - name: source-version
+        id: source-version
+        run: |
+          echo "::set-output name=version::$(cat ts-admin-basic-info-service/version)"
+      #needs to be copied when other service should be changed - ts-admin-basic-info-service
+      - name: push-container-image
+        uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: ts-admin-basic-info-service
+          registry: ghcr.io
+          username: ${{ github.repository }}
+          password: ${{ secrets.GHCR_TOKEN }}
+          dockerfile: ts-auth-service/Dockerfile
+          directory:  ts-auth-service
+          addLatest: true
+          tags: ${{ steps.source-version.outputs.version }},latest
