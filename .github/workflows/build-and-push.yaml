@@ -38,8 +38,8 @@ jobs:
           tags: ${{ steps.source-version.outputs.version }},latest
       
       #needs to be copied when other service should be changed - ts-admin-basic-info-service
-      - name: source-version
-        id: source-version
+      - name: source-version-admin-basic-info-service
+        id: source-version-admin-basic-info-service
         run: |
           echo "::set-output name=version::$(cat ts-admin-basic-info-service/version)"
       #needs to be copied when other service should be changed - ts-admin-basic-info-service
