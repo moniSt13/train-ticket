@@ -18,7 +18,7 @@ jobs:
           distribution: 'adopt'
       - name: Build with Maven
         run: mvn clean package -Dmaven.test.skip=true
-
+############################## service information #########################
       #needs to be copied when other service should be changed
       - name: source-version
         id: source-version
@@ -37,12 +37,12 @@ jobs:
           addLatest: true
           tags: ${{ steps.source-version.outputs.version }},latest
       
-      #needs to be copied when other service should be changed - ts-admin-basic-info-service
+      #ts-admin-basic-info-service
       - name: source-version-admin-basic-info-service
         id: source-version-admin-basic-info-service
         run: |
           echo "::set-output name=version::$(cat ts-admin-basic-info-service/version)"
-      #needs to be copied when other service should be changed - ts-admin-basic-info-service
+      #s-admin-basic-info-service
       - name: push-container-image
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
@@ -52,5 +52,24 @@ jobs:
           password: ${{ secrets.GHCR_TOKEN }}
           dockerfile: ts-admin-basic-info-service/Dockerfile
           directory:  ts-admin-basic-info-service
+          addLatest: true
+          tags: ${{ steps.source-version.outputs.version }},latest
+      
+
+      #ts-order-service
+      - name: source-version-ts-order-service
+        id: source-version-ts-order-service
+        run: |
+          echo "::set-output name=version::$(cat ts-order-service/version)"
+      #s-order-service
+      - name: push-container-image
+        uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: ts-order-service
+          registry: ghcr.io
+          username: ${{ github.repository }}
+          password: ${{ secrets.GHCR_TOKEN }}
+          dockerfile: ts-order-service/Dockerfile
+          directory:  ts-order-service
           addLatest: true
           tags: ${{ steps.source-version.outputs.version }},latest
