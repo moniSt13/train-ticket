@@ -72,4 +72,4 @@ jobs:
           dockerfile: ts-order-service/Dockerfile
           directory:  ts-order-service
           addLatest: true
-          tags: ${{ steps.source-version.outputs.version }},latest
+          tags: ${{ steps.source-version-ts-order-service.outputs.version }},latest
